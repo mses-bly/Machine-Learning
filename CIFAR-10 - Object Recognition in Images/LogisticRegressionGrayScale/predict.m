@@ -16,8 +16,8 @@ p = zeros(m, 1);
 %
 
 aux = sigmoid(X_aux*theta);
-one = find(aux >= 0.6);
-zero = find(aux < 0.6);
+one = find(aux >= 0.7);
+zero = find(aux < 0.7);
 p(one) = 1;
 p(zero) = 0;
 

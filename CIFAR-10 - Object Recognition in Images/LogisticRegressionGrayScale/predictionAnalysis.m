@@ -12,11 +12,11 @@ predicted = predict(theta,X);
 %     end
 % end
 
-true_positive = sum(actual.*predicted);
+true_positive = sum(actual.*predicted)
 
-false_positive = sum(predicted(find(actual == 0)));
+false_positive = sum(predicted(find(actual == 0)))
 
-false_negative = sum(actual(find(predicted == 0)));
+false_negative = sum(actual(find(predicted == 0)))
 
 precision = true_positive/(true_positive+false_positive);
 

@@ -1,4 +1,4 @@
-function [ X, y ] = loadData(img_folder_path,labels_file_path)
+function [X,y, X_tr, y_tr, X_cv, y_cv, X_ts, y_ts] = loadData(img_folder_path,labels_file_path)
 %LOADDATA Loads the images and labels
 %   Load the images in folder_path, converts them from RGB to Gray Scale
 %   and load its labels
@@ -18,9 +18,9 @@ tline = fgetl(fid);
 
 tline = fgetl(fid);
 
-how_much = 2000;
+how_much = 12000;
 
-while ischar(tline) && how_much >= 0
+while ischar(tline) && how_much > 0
     tline = strsplit(tline,',');
     tline = cellfun(@str2num,tline);
     tline = tline(:,2);
@@ -41,5 +41,13 @@ for i = 1:m
     image = image(:);
     X = [X;image'];
 end
+
+%feature normalization
+[X_norm, mu, sigma] = featureNormalize(X);
+X = X_norm;
+
+%divide set into training, cross validation and test.
+[X_tr, y_tr, X_cv, y_cv, X_ts, y_ts] = divideSet( X, y);
+
 end
 
