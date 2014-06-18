@@ -6,7 +6,7 @@ m = size(X, 1); % Number of training examples
 X_aux = [ones(m, 1) X];
 aux = sigmoid(X_aux*theta);
 
-error = sum((aux-y).^2)/(2*m);
+error = sum((aux-y).^2)/(m);
 
 end
 

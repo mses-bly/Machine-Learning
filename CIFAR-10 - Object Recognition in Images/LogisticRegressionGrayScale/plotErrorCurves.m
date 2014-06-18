@@ -1,12 +1,12 @@
-function [] = plotLearningCurves( X,y, learningRate, iterations)
+function [] = plotErrorCurves( X,y, learningRate, iterations)
 %PLOTLEARNINGCURVES Given theta, the training set and the cross validation
 %set, plots the learning curves in order to determine high variance or high
 %bias
 t_s = [];
 cv_error = [];
 tr_error = [];
-
-for i=100:50:length(y)
+%modify step and max val to get more informative plots
+for i=1:30:1000%length(y)
     
     t_s = [t_s;i];
     
@@ -14,9 +14,9 @@ for i=100:50:length(y)
     
     [ cost,theta] = stochasticTrain( X_tr,y_tr, learningRate, iterations);
     
-    cv_error = [cv_error;computeError(X_cv,y_cv,theta)];
+    cv_error = [cv_error;(computeError(X_cv,y_cv,theta))/length(y(1:i,:))];
     
-    tr_error = [tr_error;computeError(X_tr,y_tr,theta)];
+    tr_error = [tr_error;(computeError(X_tr,y_tr,theta))/length(y(1:i,:))];
 
 end
 
