@@ -4,3 +4,5 @@ CIFAR-10 - Object Recognition in Images/trainLabels.csv
 CIFAR-10 - Object Recognition in Images/trainLabelsAutomobile.csv
 *.asv
 CIFAR-10 - Object Recognition in Images/files/*
+*.7z
+*.png
