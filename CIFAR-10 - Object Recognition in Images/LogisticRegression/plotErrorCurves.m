@@ -1,4 +1,4 @@
-function [] = plotErrorCurves( X,y, learningRate, iterations)
+function [] = plotErrorCurves( X,y)
 %PLOTLEARNINGCURVES Given theta, the training set and the cross validation
 %set, plots the learning curves in order to determine high variance or high
 %bias
@@ -6,7 +6,7 @@ t_s = [];
 cv_error = [];
 tr_error = [];
 %modify step and max val to get more informative plots
-for i=1 :2500:45000%length(y)
+for i=1:500:9000%length(y)
     fprintf('%d\n',i);
     t_s = [t_s;i];
     tr_size = round(0.9*size(X(1:i,:),1));

@@ -12,15 +12,15 @@ folder = 'D:\Moises\Proyectos\Machine_Learning\CIFAR-10 - Object Recognition in 
 
 %process labels file
 %fid = fopen(labels_file_path);
-fid = fopen('D:\Moises\Proyectos\Machine_Learning\CIFAR-10 - Object Recognition in Images\trainLabelsNumerical.csv');
+fid = fopen('D:\Moises\Proyectos\Machine_Learning\CIFAR-10 - Object Recognition in Images\files\trainLabelsNumerical.csv');
 
 %ignore header line
 tline = fgetl(fid);
 
 tline = fgetl(fid);
 
-how_much = 12000;
-
+how_much = 100;
+disp('Loading labels.......................................................');
 while ischar(tline) %&& how_much > 0
     tline = strsplit(tline,',');
     tline = cellfun(@str2num,tline);
@@ -31,28 +31,27 @@ while ischar(tline) %&& how_much > 0
 end
 fclose(fid);
 
-disp('Finished loading labels');
+disp('Finished loading labels..............................................');
 
 %get images
-m = length(y);
+for i = 45001:50000
+    img_path = strcat(folder,'\');
+    img_path = strcat(img_path,num2str(i));
+    img_path = strcat(img_path,'.png');
+    fprintf('Loaded image %s.\n',img_path);
+    img = imread(img_path);
+    img = im2double(img);
+    [m n k] = size(img);
+    img  = permute(img, [3 2 1]);
+    img = reshape(img, [k  m*n]);
+    img = img(:);
+    X = [X;img'];
+end
 
-% for i = 1:1000
-%     img_path = strcat(folder,'\');
-%     img_path = strcat(img_path,num2str(i));
-%     img_path = strcat(img_path,'.png');
-%     fprintf('Loaded image %s.\n',img_path);
-%     image = im2double(rgb2gray(imread(img_path))); 
-%     image = image';
-%     image = image(:);
-%     X = [X;image'];
-% end
-% 
-% % %feature normalization
-% [X_norm, mu, sigma] = featureNormalize(X);
-% X = X_norm;
-
-%divide set into training, cross validation and test.
-%[X_tr, y_tr, X_cv, y_cv, X_ts, y_ts] = divideSet( X, y);
-
+%feature normalization
+disp('Normalization........................................................');
+[X_norm, mu, sigma] = featureNormalize(X);
+X = X_norm;
+disp('DONE..................................................................');
 end
 

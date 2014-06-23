@@ -1,9 +1,11 @@
-function [ cost,theta ] = stochasticTrain( X,y, learningRate, iterations)
+function [ cost,theta ] = stochasticTrain( X,y, learningRate, iterations, initialTheta)
 %STOCHASTICTRAIN Stochastic gradient descent.
 
 [m, n] = size(X);
 
-theta = zeros(n + 1, 1);
+%theta = zeros(n + 1, 1); 
+
+theta = initialTheta;
 
 X_aux = [ones(m, 1) X];
 
